@@ -2,7 +2,7 @@ const stupidCompact = messages => {
   messages = messages.toReversed();
   const roles = {};
   for (const message of messages) {
-    try{
+    try {
       const role = String(message.role);
       if (role === 'system') continue;
       roles[role] ??= new Set();
@@ -11,7 +11,7 @@ const stupidCompact = messages => {
         roles[role].add(shred);
       }
       message.content = shreds.join(' ').trim();
-    }catch{}
+    } catch {}
   }
   return messages.reverse();
 };
