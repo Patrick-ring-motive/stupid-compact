@@ -4,7 +4,8 @@ const stupidCompact = messages => {
   for (const message of messages) {
     try {
       const role = String(message.role);
-      if (role === 'system') continue;
+      if (/system|developer/.test(role)) continue;
+      if (typeof message.content !== 'string') continue;
       roles[role] ??= new Set();
       const shreds = [...new Set(message.content.split(' '))].filter(x => !roles[role].has(x));
       for (const shred of shreds) {
